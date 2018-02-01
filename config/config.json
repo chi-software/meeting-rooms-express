@@ -1,0 +1,8 @@
+{
+  "port": 3000,
+  "mongoose": {
+    "uri": "mongodb://localhost/practicesApp",
+    "testUri": "mongodb://localhost/testApp"
+  },
+  "secret": "supadupasecret"
+}

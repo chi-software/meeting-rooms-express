@@ -1,0 +1,54 @@
+{
+  "name": "meeting-rooms-express",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "engines": {
+    "node": ">=6.11.1"
+  },
+  "scripts": {
+    "prestart": "npm run start-mongo",
+    "start": "cross-env NODE_ENV=production node ./bin/www",
+    "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
+    "pretest": "cross-env NODE_ENV=test npm run seed",
+    "test": "cross-env NODE_ENV=test mocha --timeout 5000 --exit",
+    "seed": "node createDB.js",
+    "start-mongo": "start mongod",
+    "stop-mongo": "start mongo admin --eval \"db.getSiblingDB('admin').shutdownServer()\""
+  },
+  "author": "chi-software",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:chi-software/meeting-rooms-express.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chi-software/meeting-rooms-express/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.6.0",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "chai-http": "^3.0.0",
+    "cors": "^2.8.4",
+    "cross-env": "^5.1.3",
+    "debug": "^3.1.0",
+    "express": "^4.16.2",
+    "glob": "^7.1.2",
+    "jsonwebtoken": "^8.1.1",
+    "mongoose": "^5.0.3",
+    "mongoose-paginate": "^5.0.3",
+    "morgan": "^1.9.0",
+    "nconf": "^0.10.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.16.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-mocha": "^4.11.0",
+    "eslint-plugin-node": "^5.2.1",
+    "mocha": "^5.0.0",
+    "nodemon": "^1.14.12",
+    "should": "^13.2.1"
+  }
+}
