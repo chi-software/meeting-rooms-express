@@ -1,5 +1,7 @@
 # meetting-rooms-backend(express edition)
 
+[![Build Status](https://travis-ci.org/chi-software/meeting-rooms-express.svg?branch=master)](https://travis-ci.org/chi-software/meeting-rooms-express)
+
 - clone project;
 
 # Commands
