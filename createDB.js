@@ -17,9 +17,39 @@ const requireModels = (callback) => {
   require('./models/user');
   require('./models/practice');
   require('./models/technology');
+  require('./models/room');
+  require('./models/booking');
 
   async.each(Object.keys(mongoose.models), (modelName, next) => {
     mongoose.models[modelName].ensureIndexes(next);
+  }, callback);
+};
+
+const createRooms = (callback) => {
+  const rooms = [
+    { id: 1, number: 1, description: 'Room №1' },
+    { id: 2, number: 2, description: 'Room №2' },
+    { id: 3, number: 3, description: 'Room №3' },
+    { id: 4, number: 4, description: 'Room №4' },
+  ];
+
+  async.each(rooms, (data, next) => {
+    const room = new mongoose.models.Room(data);
+    room.save(next);
+  }, callback);
+};
+
+const createBookings = (callback) => {
+  const bookings = [
+    { userId: 1, roomId: 1, timeFrom: new Date, timeTo: new Date },
+    { userId: 1, roomId: 2, timeFrom: new Date, timeTo: new Date },
+    { userId: 2, roomId: 3, timeFrom: new Date, timeTo: new Date },
+    { userId: 2, roomId: 4, timeFrom: new Date, timeTo: new Date },
+  ];
+
+  async.each(bookings, (data, next) => {
+    const booking = new mongoose.models.Booking(data);
+    booking.save(next);
   }, callback);
 };
 
@@ -56,9 +86,21 @@ const createTechnologies = (callback) => {
 };
 
 const createUsers = (callback) => {
-  const users = [
-    { email: 'admin@mail.com', password: '12345678', roleId: 1 }
-  ];
+  const users = [{
+    roleId: 1,
+    departmentId: 1,
+    firstName: 'Admin',
+    lastName: 'Admin',
+    email: 'admin@mail.com',
+    password: '12345678',
+  }, {
+    roleId: 1,
+    departmentId: 1,
+    firstName: 'Admin',
+    lastName: 'Admin',
+    email: 'alex@gmail.com',
+    password: 'password',
+  }];
 
   async.each(users, (data, next) => {
     const user = new mongoose.models.User(data);
@@ -73,7 +115,9 @@ async.series([
   requireModels,
   createPractices,
   createTechnologies,
-  createUsers
+  createUsers,
+  createRooms,
+  createBookings,
 ], (err) => {
   mongoose.disconnect();
   process.exit(err ? 255 : 0);

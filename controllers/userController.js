@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user').User;
 const config = require('../config');
 
+const SELECT = '-__v -hashPassword';
+
 const generateToken = (user) => {
   return jwt.sign({ _id: user._id }, config.get('secret'), { expiresIn: 60 * 60 * 24 });
 };
@@ -52,6 +54,16 @@ const userController = () => ({
         res.json({ token: generateToken(user) });
       })
       .catch(errHandler(res));
+  },
+
+  getUsers(req, res, next) {
+    User.find({}, SELECT, (err, results) => {
+      if (err) {
+        next(err);
+      } else {
+        res.send(results);
+      }
+    });
   },
 
   loginRequired(req, res, next) {

@@ -18,6 +18,7 @@ describe('AUTH', () => {
     describe('POST auth/register new user', () => {
       it('it should return 200 and right email', done => {
         const user = {
+          id: 1,
           email: 'admin+1@mail.com',
           password: '12345678'
         };

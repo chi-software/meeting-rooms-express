@@ -192,4 +192,57 @@ describe('API with token', () => {
     });
   });
 
+  describe('*NEW GET api/users', () => {
+    it('it should return 200 and res should be an array(2)', done => {
+      chai.request(app)
+        .get('/api/users')
+        .set(getAuthorizationHeaders())
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body.length.should.be.eql(2);
+          res.body[0].should.have.property('email');
+          res.body[0].should.have.property('firstName');
+          res.body[0].should.have.property('lastName');
+          done();
+        });
+    });
+  });
+
+  describe('*NEW GET api/bookings', () => {
+    it('it should return 200 and res should be an array(4)', done => {
+      chai.request(app)
+        .get('/api/bookings')
+        .set(getAuthorizationHeaders())
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body.length.should.be.eql(4);
+          res.body[0].should.have.property('_id');
+          res.body[0].should.have.property('userId');
+          res.body[0].should.have.property('roomId');
+          res.body[0].should.have.property('timeFrom');
+          res.body[0].should.have.property('timeTo');
+          done();
+        });
+    });
+  });
+
+  describe('*NEW GET api/rooms', () => {
+    it('it should return 200 and res should be an array(4)', done => {
+      chai.request(app)
+        .get('/api/rooms')
+        .set(getAuthorizationHeaders())
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body.length.should.be.eql(4);
+          res.body[0].should.have.property('id');
+          res.body[0].should.have.property('number');
+          res.body[0].should.have.property('description');
+          done();
+        });
+    });
+  });
+
 });
