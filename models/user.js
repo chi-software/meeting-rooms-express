@@ -25,11 +25,7 @@ const userSchema = new Schema({
     unique: false,
     required: false,
   },
-  departmentId: {
-    type: Number,
-    unique: false,
-    required: false,
-  },
+  departments: [{ type: Schema.Types.ObjectId, ref: 'Department' }],
   hashPassword: {
     type: String,
     required: true,

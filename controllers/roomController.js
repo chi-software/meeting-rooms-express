@@ -1,6 +1,6 @@
 const Room = require('../models/room').Room;
 
-const SELECT = '-_id -__v';
+const SELECT = '-__v';
 
 const roomController = () => {
 

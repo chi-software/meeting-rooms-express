@@ -4,12 +4,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const apiRouter = require('./routes/apiRoutes')();
-const authRouter = require('./routes/authRoutes')();
 const config = require('./config');
 
 const app = express();
 
-// no logger info in test mode
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));
 }
@@ -28,10 +26,9 @@ app.use((req, res, next) => {
 });
 
 app.use('/api', apiRouter);
-app.use('/auth', authRouter);
 
 app.use((req, res) => {
-  res.status(404).send('oups, not found this');
+  res.status(404).send('not found');
 });
 
 app.use((err, req, res) => {

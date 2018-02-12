@@ -15,7 +15,7 @@ describe('AUTH', () => {
 
   describe('REGISTER', () => {
 
-    describe('POST auth/register new user', () => {
+    describe('POST /api/auth/register new user', () => {
       it('it should return 200 and right email', done => {
         const user = {
           id: 1,
@@ -24,7 +24,7 @@ describe('AUTH', () => {
         };
 
         chai.request(app)
-          .post('/auth/register')
+          .post('/api/auth/register')
           .send(user)
           .end((err, res) => {
             res.should.have.status(200);
@@ -35,14 +35,14 @@ describe('AUTH', () => {
       });
     });
 
-    describe('POST auth/register user without email', () => {
+    describe('POST /api/auth/register user without email', () => {
       it('it should return 400 and message', done => {
         const user = {
           password: '12345678'
         };
 
         chai.request(app)
-          .post('/auth/register')
+          .post('/api/auth/register')
           .send(user)
           .end((err, res) => {
             res.should.have.status(400);
@@ -53,14 +53,14 @@ describe('AUTH', () => {
       });
     });
 
-    describe('POST auth/register user without password', () => {
+    describe('POST /api/auth/register user without password', () => {
       it('it should return 400 and message', done => {
         const user = {
           email: 'admin+1@mail.com',
         };
 
         chai.request(app)
-          .post('/auth/register')
+          .post('/api/auth/register')
           .send(user)
           .end((err, res) => {
             res.should.have.status(400);
@@ -71,7 +71,7 @@ describe('AUTH', () => {
       });
     });
 
-    describe('POST auth/register user who already exist', () => {
+    describe('POST /api/auth/register user who already exist', () => {
       it('it should return 409', done => {
         const user = {
           email: 'admin+1@mail.com',
@@ -79,7 +79,7 @@ describe('AUTH', () => {
         };
 
         chai.request(app)
-          .post('/auth/register')
+          .post('/api/auth/register')
           .send(user)
           .end((err, res) => {
             res.should.have.status(409);
@@ -95,7 +95,7 @@ describe('AUTH', () => {
 
   describe('SING_IN', () => {
 
-    describe('POST auth/sign_in registered user', () => {
+    describe('POST /api/auth/sign_in registered user', () => {
       it('it should return 200 and valid token', done => {
         const user = {
           email: 'admin@mail.com',
@@ -103,7 +103,7 @@ describe('AUTH', () => {
         };
 
         chai.request(app)
-          .post('/auth/sign_in')
+          .post('/api/auth/sign_in')
           .send(user)
           .end((err, res) => {
             res.should.have.status(200);
@@ -117,7 +117,7 @@ describe('AUTH', () => {
       });
     });
 
-    describe('POST auth/sign_in previous user', () => {
+    describe('POST /api/auth/sign_in previous user', () => {
       it('it should return 200 and valid token', done => {
         const user = {
           email: 'admin+1@mail.com',
@@ -125,7 +125,7 @@ describe('AUTH', () => {
         };
 
         chai.request(app)
-          .post('/auth/sign_in')
+          .post('/api/auth/sign_in')
           .send(user)
           .end((err, res) => {
             res.should.have.status(200);
@@ -139,7 +139,7 @@ describe('AUTH', () => {
       });
     });
 
-    describe('POST auth/sign_in user with wrong email', () => {
+    describe('POST /api/auth/sign_in user with wrong email', () => {
       it('it should return 401 and right message', done => {
         const user = {
           email: 'wrong@mail.com',
@@ -147,7 +147,7 @@ describe('AUTH', () => {
         };
 
         chai.request(app)
-          .post('/auth/sign_in')
+          .post('/api/auth/sign_in')
           .send(user)
           .end((err, res) => {
             res.should.have.status(401);
@@ -158,14 +158,14 @@ describe('AUTH', () => {
       });
     });
 
-    describe('POST auth/sign_in user with no email', () => {
+    describe('POST /api/auth/sign_in user with no email', () => {
       it('it should return 401 and right message', done => {
         const user = {
           password: 'password'
         };
 
         chai.request(app)
-          .post('/auth/sign_in')
+          .post('/api/auth/sign_in')
           .send(user)
           .end((err, res) => {
             res.should.have.status(401);
@@ -176,7 +176,7 @@ describe('AUTH', () => {
       });
     });
 
-    describe('POST auth/sign_in user with wrong password', () => {
+    describe('POST /api/auth/sign_in user with wrong password', () => {
       it('it should return 409 and right message', done => {
         const user = {
           email: 'admin@mail.com',
@@ -184,7 +184,7 @@ describe('AUTH', () => {
         };
 
         chai.request(app)
-          .post('/auth/sign_in')
+          .post('/api/auth/sign_in')
           .send(user)
           .end((err, res) => {
             res.should.have.status(401);
@@ -195,14 +195,14 @@ describe('AUTH', () => {
       });
     });
 
-    describe('POST auth/sign_in user with no password', () => {
+    describe('POST /api/auth/sign_in user with no password', () => {
       it('it should return 409 and right message', done => {
         const user = {
           email: 'admin@mail.com'
         };
 
         chai.request(app)
-          .post('/auth/sign_in')
+          .post('/api/auth/sign_in')
           .send(user)
           .end((err, res) => {
             res.should.have.status(401);
