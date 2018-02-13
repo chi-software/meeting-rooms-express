@@ -4,12 +4,12 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema({
   userId: {
-    type: Number,
+    type: String,
     unique: false,
     required: true,
   },
   roomId: {
-    type: Number,
+    type: String,
     unique: false,
     required: true,
   },
@@ -23,6 +23,16 @@ const schema = new Schema({
     unique: false,
     required: true,
   },
+  bookingType: {
+    type: String,
+    unique: false,
+    required: false,
+  },
+  bookingStatus: {
+    type: String,
+    unique: false,
+    required: false,
+  }
 });
 
 exports.Booking = mongoose.model('Booking', schema);

@@ -49,7 +49,7 @@ const bookingController = () => {
         return res.json({ err: 'bad_request' });
       }
 
-      resolve(Booking.findById(req.params._id, (err, results) => {
+      resolve(Booking.findById(req.params._id, SELECT, (err, results) => {
         if (err) {
           res.send(err);
         }
@@ -62,7 +62,7 @@ const bookingController = () => {
           if (err) {
             res.send(err);
           }
-          res.json({ results });
+          res.json(results);
         });
       }));
     })
