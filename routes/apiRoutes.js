@@ -8,6 +8,7 @@ const bookingController = require('../controllers/bookingController')();
 const apiRouter = express.Router();
 
 const router = () => {
+
   // AUTH
   apiRouter.route('/auth/register')
     .post(userController.register);
@@ -17,21 +18,27 @@ const router = () => {
 
   // ROOMS
   apiRouter.route('/rooms')
-    .get(roomController.getRooms);
+    .get(userController.loginRequired, roomController.getRooms);
 
   // BOOKINGS
   apiRouter.route('/bookings')
-    .get(bookingController.getBookings)
-    .post(bookingController.postBooking);
+    .get(userController.loginRequired, bookingController.getBookings)
+    .post(userController.loginRequired, bookingController.postBooking);
 
+  // BOOKING
   apiRouter.route('/bookings/:_id')
-    .get(bookingController.getBooking)
-    .put(bookingController.putBooking)
-    .delete(bookingController.deleteBooking);
+    .get(userController.loginRequired, bookingController.getBooking)
+    .put(userController.loginRequired, bookingController.putBooking)
+    .delete(userController.loginRequired, bookingController.deleteBooking);
 
   // USERS
   apiRouter.route('/users')
-    .get(userController.getUsers);
+    .get(userController.loginRequired, userController.getUsers);
+
+  // USER
+  apiRouter.route('/users/:_id')
+    .get(userController.loginRequired, userController.getUser)
+    .put(userController.loginRequired, userController.editUser);
 
   return apiRouter;
 };

@@ -66,6 +66,42 @@ const userController = () => ({
     });
   },
 
+  getUser(req, res, next) {
+    User.findById(req.params._id, SELECT, (err, results) => {
+      if (err) {
+        next(err);
+      } else {
+        res.send(results);
+      }
+    });
+  },
+
+  editUser(req, res, next) {
+    return new Promise(resolve => {
+      if (!req.params._id) {
+        return res.json({ err: 'bad_request' });
+      }
+
+      resolve(User.findById(req.params._id, SELECT, (err, user) => {
+        if (err) {
+          res.send(err);
+        }
+        user.firstName = req.body.firstName || user.firstName;
+        user.lastName = req.body.lastName || user.lastName;
+        user.role = req.body.role || user.role;
+        user.department = req.body.department || user.department;
+
+        user.save(function (err) {
+          if (err) {
+            res.send(err);
+          }
+          res.json(user);
+        });
+      }));
+    })
+      .catch(err => console.log(err));
+  },
+
   loginRequired(req, res, next) {
     Promise
       .resolve(req.user ? User.findById(req.user._id) : void(0))

@@ -39,10 +39,10 @@ const createRooms = (callback) => {
 
 const createBookings = (callback) => {
   const bookings = [
-    { userId: 1, roomId: 1, timeFrom: new Date, timeTo: new Date },
-    { userId: 1, roomId: 2, timeFrom: new Date, timeTo: new Date },
-    { userId: 2, roomId: 3, timeFrom: new Date, timeTo: new Date },
-    { userId: 2, roomId: 4, timeFrom: new Date, timeTo: new Date },
+    { userId: '1', roomId: '1', timeFrom: new Date, timeTo: new Date },
+    { userId: '1', roomId: '2', timeFrom: new Date, timeTo: new Date },
+    { userId: '2', roomId: '3', timeFrom: new Date, timeTo: new Date },
+    { userId: '2', roomId: '4', timeFrom: new Date, timeTo: new Date },
   ];
 
   async.each(bookings, (data, next) => {
@@ -58,10 +58,10 @@ const createUsers = (callback) => {
     email: 'admin@mail.com',
     password: '12345678',
   }, {
-    firstName: 'Admin',
-    lastName: 'Admin',
     email: 'alex@gmail.com',
     password: 'password',
+    role: 'manager',
+    department: 'management',
   }];
 
   async.each(users, (data, next) => {

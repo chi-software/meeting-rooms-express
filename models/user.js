@@ -2,6 +2,9 @@ const bcrypt = require('bcrypt');
 const mongoose = require('../lib/mongoose');
 const Schema = mongoose.Schema;
 
+const ROLES = ['regular', 'admin', 'manager'];
+const DEPARTMENTS = ['general', 'JS', 'management', 'Node'];
+
 const userSchema = new Schema({
   email: {
     type: String,
@@ -13,19 +16,25 @@ const userSchema = new Schema({
   firstName: {
     type: String,
     unique: false,
-    required: false,
+    default: '',
   },
   lastName: {
     type: String,
     unique: false,
-    required: false,
+    default: '',
   },
-  roleId: {
-    type: Number,
-    unique: false,
-    required: false,
+  role: {
+    type: String,
+    enum: ROLES,
+    default: 'regular',
+    required: true,
   },
-  departments: [{ type: Schema.Types.ObjectId, ref: 'Department' }],
+  department: {
+    type: String,
+    enum: DEPARTMENTS,
+    default: 'general',
+    required: true,
+  },
   hashPassword: {
     type: String,
     required: true,
