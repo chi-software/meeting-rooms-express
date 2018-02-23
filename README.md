@@ -6,18 +6,28 @@
 
 # Commands
 - `npm i`
-- `npm start` (for start mongod, create db, seed, start server at default port: 3000)
-- Optional: 
-- `npm seed` (make db and seed mock data, port: `27017` (mongo default, or can be changed in `src/config.js`))
-- `npm run dev` (for development, default port: 3000)
-- `npm test`
+- `npm start`
+- `npm run dev` db from mongoLab
+- `npm test` local db start-mongo
+- `npm run start-mongo`
+- `npm run stop-mongo`
 
 # AUTH_API (open)
-- POST: `http://localhost:{port}/auth/register` -> req: { email: 'email', password: 'password' } -> res: email and status_code: 200 
-- POST: `http://localhost:{port}/auth/sign_in` -> req: { email: 'email', password: 'password' } -> res: token(exp 5min) and status_code: 200
+- POST: `http://localhost:3000/api/auth/register` -> req: `{ email: 'email', password: 'password' }` -> res: `{email}` and Status: 200 
+- POST: `http://localhost:3000/api/auth/sign_in` -> req: `{ email: 'email', password: 'password' }` -> res: `{token}` and Status: 200
 
 # API (with `Authorization: token` in header)
-- GET: `http://localhost:{port}/api/practices` -> res: practices
-- GET: `http://localhost:{port}/api/practices/:practice_id` -> res: practice
-- GET: `http://localhost:{port}/api/practices/:practice_id/technologies?page=1&per=5` -> res: technsologies(page, per - optional)
-- GET: `http://localhost:{port}/api/practices/:practice_id/technologies/:technology_id` -> res: technsology
+## Rooms
+- GET: `http://localhost:3000/api/rooms` -> `[Rooms]`
+
+## Bookings
+- GET: `http://localhost:3000/api/bookings` -> `[Bookings]`
+- POST: `http://localhost:3000/api/bookings` req: `{userId: String, roomId: String, timeFrom: Date, timeTo: Date}` -> `{new Booking}` 
+- GET: `http://localhost:3000/api/bookings/:id` -> `{booking}`
+- PUT: `http://localhost:3000/api/bookings/:id` -> `{userId: String, roomId: String, timeFrom: Date, timeTo: Date}` -> `{new Booking}`
+- DELETE: `http://localhost:3000/api/bookings/:id` -> Status 200
+
+## Users
+- GET: `http://localhost:3000/api/users` -> `[Users]`
+- GET: `http://localhost:3000/api/users/:id` -> `{User}`
+- PUT: `http://localhost:3000/api/users/:id` -> `{new User}`
